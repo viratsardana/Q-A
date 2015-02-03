@@ -48,7 +48,7 @@ echo '<!DOCTYPE html>
 
 <div class="container well">
 <h3>Username already exists. You may want to change it. You will be redirected to signup page in 10 seconds</h1>
-<center><a href="#" class="btn btn-danger" role="button">Go Back to Signup Page</a></center>
+<center><a href="index.php" class="btn btn-danger" role="button">Go Back to Signup Page</a></center>
 </div>
 </body>
 

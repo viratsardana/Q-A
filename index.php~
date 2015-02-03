@@ -38,7 +38,7 @@ label,h3{
 <body>
 
 <div class="container" id="cont">
-<form class="form-horizontal" role="form" id="form" method="POST" action="validate.php">
+<form class="form-horizontal" role="form" id="form" method="POST" action="validate.php" enctype="multipart/form-data">
   <div class="col-sm-offset-8"><h3>&nbsp;&nbsp;Returning Users</h3></div>
   <br>
   <div class="form-group">

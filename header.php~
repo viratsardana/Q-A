@@ -25,9 +25,12 @@
 
 <style type="text/css">
 
+body{
+padding-top: 100px;	
+}
+
 #nbar{
 width: 80%;
-position: relative;
 margin-left: auto;
 margin-right: auto;
 //border:solid;	
@@ -48,7 +51,7 @@ width:150px;
 
 
 <body>
-<nav class="navbar navbar-default" id="nbar">
+<nav class="navbar navbar-default navbar-fixed-top" id="nbar">
   <div class="container-fluid" id="cont">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -58,7 +61,7 @@ width:150px;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#" id="hbutton">Q&A</a>
+      <a class="navbar-brand" href="home.php" id="hbutton">Q&A</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -94,6 +97,8 @@ width:150px;
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
 
 </body>
 
