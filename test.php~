@@ -6,7 +6,7 @@ echo '
 
 <head></head>
 
-<body>Hi everyone this is virat</body>
+<body>Hi my name is khan and i am not a terrorist</body>
 
 </html>
 ';
