@@ -24,8 +24,11 @@ $row=mysqli_fetch_array($result);
 //echo $row['email'];
 $_SESSION['email']=$row['email'];
 $_SESSION['fname']=$row['fname'];
+$_SESSION['uid']=$row['id'];
 
-//echo $_SESSION['fname'];
+//make directory for the user//
+mkdir("pimage/".$_SESSION['uid']);
+copy("images/default_profile.jpg",'pimage/'.$_SESSION['uid'].'/default.jpg');
 
 ?>
 
@@ -49,7 +52,7 @@ left: 35px;
 }
 
 #test{
-//border:solid;	
+border:solid;	
 }
 
 #addimgbutton{
@@ -60,6 +63,7 @@ margin-top: 2px;
 
 body{
 padding-top: 100px;	
+overflow: hidden;
 }
 
 #nbar{
@@ -71,17 +75,37 @@ margin-right: auto;
 
 #search{
 width: 360px;	
-}
+}l Gates studied Law, although in between he found passion for techn
 
 #addqbutton{
 width:150px;	
 }	
 
+#upload{
+display: none;	
+}
 
+#upload_link{
+left:50px;
+position: relative;	
+}
+
+#upload_submit{
+position: relative;
+top:30px;
+left: -30px;	
+display: none;
+}
+
+/*#ppos{
+position: relative;
+left:35px;	
+}*/
 
 </style>
 
 <script src="script/upload.js"></script>
+
 
 
 </head>
@@ -143,24 +167,82 @@ width:150px;
 <div class="col-md-2 col-md-offset-1" id="test">
 
 <div id="profile_image">
+<?php
+session_start();
 
-<img src="images/default_profile.jpg" width="130px" height="130px">
+include 'dbconnection.php';
+
+$username=$_SESSION['username'];
+
+$query="select profileimg from user where username='$username';";
+
+$result=mysqli_query($conn,$query);
+
+$row=mysqli_fetch_array($result);
+
+$src=$row['profileimg'];
+$src="pimage/".$_SESSION['uid']."/".$src;
+
+//echo $src;
+
+echo '<img src="'.$src.'"width="130px" height="130px">';
+
+//<img src="images/default_profile.jpg" width="130px" height="130px" id="disp_p_image">//
+
+?>
 
 </div>
-<form id="uploadImage" action="" method="POST" enctype="multipart/form-data">
-<input type="submit" class="btn btn-primary" value="Add Photo" id="addimgbutton">
+<form id="uploadImage" action="upload_profile_image.php" method="POST" enctype="multipart/form-data">
+<input type="file" id="upload" name="userfile"></input>
+<a href="" id="upload_link">Add your photo</a>
+<input type="submit" id="upload_submit"></input>
 </form>
+<hr>
+<p id="ppos">asd</p>
+<p>asd</p>
+<p>asd</p>
+<p>asd</p>
+<p>asd</p>
+<p>asd</p>
+<p>asd</p>
 </div>
 
 
 
 <div class="col-md-5">
-<h3><?php echo ucwords($_SESSION['fname']);?></h3>
+<h3><?php session_start(); echo ucwords($_SESSION['fname']); /*echo $_SESSION['uid'];*/ ?></h3>
 <hr>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
+<p>Your History Goes Here</p>
 </div>
 
 <div class="col-md-3">
-This will display your interests
+<h3>This will display your interests</h3>
+<br>
+<p>Your Interests Go Here</p>
+<p>Your Interests Go Here</p>
+<p>Your Interests Go Here</p>
+<p>Your Interests Go Here</p>
+<p>Your Interests Go Here</p>
+<p>Your Interests Go Here</p>
+<p>Your Interests Go Here</p>
+<p>Your Interests Go Here</p>
 </div>
 
 </div>

@@ -1,15 +1,16 @@
-<?php
 
-
-echo '
 <html>
 
-<head></head>
+<head>
 
-<body>Hi my name is khan and i am not a terrorist</body>
+</head>
+
+<body>
+
+<form action="test1.php" method="POST">
+<input type="submit"></input>
+</form>
+
+</body>
 
 </html>
-';
-
-
-?>

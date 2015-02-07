@@ -1,5 +1,13 @@
 <?php
     
+//remaining create directory when a new user registers//
+
+if(!isset($_POST['uname'])){
+	
+	header('Location:index.php');
+	
+}    
+    
 $conn=mysqli_connect("localhost","virat","fuckup");
 
 if(!$conn){
