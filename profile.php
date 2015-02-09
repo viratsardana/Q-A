@@ -52,7 +52,7 @@ left: 35px;
 }
 
 #test{
-border:solid;	
+//border:solid;	
 }
 
 #addimgbutton{
@@ -95,6 +95,11 @@ position: relative;
 top:30px;
 left: -30px;	
 display: none;
+}
+
+#profile_image{
+position: relative;
+left:-10px;	
 }
 
 /*#ppos{
@@ -185,7 +190,7 @@ $src="pimage/".$_SESSION['uid']."/".$src;
 
 //echo $src;
 
-echo '<img src="'.$src.'"width="130px" height="130px">';
+echo '<img src="'.$src.'"width="200px">';
 
 //<img src="images/default_profile.jpg" width="130px" height="130px" id="disp_p_image">//
 
