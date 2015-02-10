@@ -25,6 +25,9 @@ $row=mysqli_fetch_array($result);
 $_SESSION['email']=$row['email'];
 $_SESSION['fname']=$row['fname'];
 $_SESSION['uid']=$row['id'];
+$_SESSION['nfollowers']=$row['nfollowers'];
+
+//echo 'hello'.$_SESSION['nfollowers'];
 
 //make directory for the user//
 mkdir("pimage/".$_SESSION['uid']);
@@ -63,7 +66,8 @@ margin-top: 2px;
 
 body{
 padding-top: 100px;	
-overflow: hidden;
+overflow-x: hidden;
+overflow-y:scroll;
 }
 
 #nbar{

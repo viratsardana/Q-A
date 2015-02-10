@@ -41,6 +41,11 @@ width: 360px;
 width:150px;	
 }	
 
+body{
+overflow-x:hidden;
+overflow-y:scroll; 	
+}
+
 
 </style>
 
