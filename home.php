@@ -53,6 +53,37 @@ overflow-y:scroll;
 
 
 <body>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Add Question
+            </h4>
+         </div>
+         <div class="modal-body">
+            <textarea placeholder="What is your question?" cols="60" rows="5"></textarea>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">Close
+            </button>
+            <button type="button" class="btn btn-primary">
+               Submit changes
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+
+
 <nav class="navbar navbar-default" id="nbar">
   <div class="container-fluid" id="cont">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -63,7 +94,7 @@ overflow-y:scroll;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#" id="hbutton">Q&A</a>
+      <a class="navbar-brand" href="home.php" id="hbutton">Q&A</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,7 +102,7 @@ overflow-y:scroll;
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" id="search">
           <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
-          <button class="btn btn-primary" id="addqbutton" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Add Question</button>        
+          <a href="#myModal" class="btn btn-primary" role="button" data-toggle="modal"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Add Question</a>       
         </div>       
       </form>
       <ul class="nav navbar-nav navbar-right">
@@ -99,38 +130,7 @@ overflow-y:scroll;
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-   aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button>
-            <h4 class="modal-title" id="myModalLabel">
-               This Modal title
-            </h4>
-         </div>
-         <div class="modal-body">
-            Add some text here
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default" 
-               data-dismiss="modal">Close
-            </button>
-            <button type="button" class="btn btn-primary">
-               Submit changes
-            </button>
-         </div>
-      </div><!-- /.modal-content -->
-</div><!-- /.modal -->
-
-
-    
+  
 
 
 </body>

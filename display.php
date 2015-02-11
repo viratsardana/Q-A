@@ -110,18 +110,35 @@ echo '<img src="'.$src.'"width="200px">';
 
 <div class="col-md-5">
 <h3><?php session_start(); echo ucwords($_GET['username']); ?></h3>
-<button class="btn btn-info btn-md" id="btn" onclick="changeText()">Follow
-
-<?php 
+<button class="btn btn-info btn-md" id="btn" onclick="changeText()"><?php 
 session_start(); 
 include 'dbconnection.php';
 $username=$_GET['username'];
+$username2=$_SESSION['username'];
 $query="select nfollowers from user where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_row($result);
 
 //$row[0] are the number of followers
-echo $row[0];
+
+$query1="select * from followers where uname1='$username2' and uname2='$username'";
+
+$result1=mysqli_query($conn,$query1);
+
+$row1=mysqli_num_rows($result1);
+
+if($row[0]==0){
+  echo 'Follow '.$row[0];	
+}
+
+else{
+
+if($row1==1)
+  echo 'Unfollow '.$row[0];
+
+else if($row1==0)
+   echo 'Follow '.$row[0];
+}
 ?>
 
 </button>

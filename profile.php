@@ -79,7 +79,7 @@ margin-right: auto;
 
 #search{
 width: 360px;	
-}l Gates studied Law, although in between he found passion for techn
+} 
 
 #addqbutton{
 width:150px;	
