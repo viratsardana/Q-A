@@ -28,7 +28,7 @@ $password=$_POST['password'];
 $query="select * from user where username='$username' and password='$password';";
 
 $result=mysqli_query($conn,$query);
-//$info=mysqli_fetch_array($result);
+
 $rows=mysqli_num_rows($result);
 
 
@@ -43,10 +43,13 @@ if(!$result || $rows<=0){
 else{
 session_start();
 
-
-
 $_SESSION['username']=$username; //username as well as id unique for very user
-//$_SESSION['email']=$info['email'];
+
+$ans=mysqli_fetch_array($result);
+
+$_SESSION['uid']=$ans['id'];
+
+//echo 'hello'.$_SESSION['uid1'];
 
 header('Location:home.php');
 

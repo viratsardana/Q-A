@@ -49,6 +49,8 @@ overflow-y:scroll;
 
 </style>
 
+<script src="script/resetmodaldata.js"></script>
+
 </head>
 
 
@@ -68,14 +70,11 @@ overflow-y:scroll;
             </h4>
          </div>
          <div class="modal-body">
-            <textarea placeholder="What is your question?" cols="60" rows="5"></textarea>
+            <textarea placeholder="What is your question?" id="q_text" cols="60" rows="5"></textarea>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default" 
-               data-dismiss="modal">Close
-            </button>
-            <button type="button" class="btn btn-primary">
-               Submit changes
+            <button type="button" class="btn btn-primary ">
+               Next
             </button>
          </div>
       </div><!-- /.modal-content -->
