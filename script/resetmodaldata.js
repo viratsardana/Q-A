@@ -19,4 +19,6 @@ $('#myModal').on('hidden.bs.modal', function(){
     $("#q_text").val('');
 });
 
+
+
 });

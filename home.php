@@ -51,6 +51,67 @@ overflow-y:scroll;
 
 <script src="script/resetmodaldata.js"></script>
 
+<script>
+
+
+
+function submitQues(){
+
+
+//store the question in a global variable
+
+question=document.getElementById("q_text").value;
+
+//alert(question);
+
+$('#myModal').modal('hide');
+	
+}
+
+function final_submit_ques(){
+	
+	//alert(question);
+	
+	
+	var t=document.getElementsByClassName("category");
+	
+	var str="";
+	
+	//alert(t.length);
+	
+	//alert(str);
+	
+	var count=0;
+	
+	for(i=0;i<t.length;i++){
+	
+	   if(t[i].checked){
+         
+         n=(t[i].value).toString();
+         
+         //alert(n);
+         
+         str=str+n+",";	   	
+	   	
+	   	}	
+		
+	}
+	
+	//alert(str);
+	
+   
+ $.post("add_ques_details.php",{ques:question,category:str},function(data){
+   	 
+   	 alert(data);
+   	
+   	});  
+   	
+		
+	
+}
+
+</script>
+
 </head>
 
 
@@ -73,13 +134,59 @@ overflow-y:scroll;
             <textarea placeholder="What is your question?" id="q_text" cols="60" rows="5"></textarea>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-primary ">
-               Next
+            <a href="#myModal2" class="btn btn-primary" role="button" data-toggle="modal" onclick="submitQues()">Next</a>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Select Category
+            </h4>
+         </div>
+         <div class="modal-body">
+            <?php
+               
+               //some algorithm goes here which will suggest user some categories//
+               
+               session_start();     
+               
+               include 'dbconnection.php';
+               
+               $query="select * from category";
+               
+               $result=mysqli_query($conn,$query);
+                              
+               while($row=mysqli_fetch_assoc($result)){
+               
+               //value and name added later if needed
+               echo '<input type="checkbox" class="category" value="'.$row['category_id'].'">'.ucfirst($row['category_name']).'<br><br>';
+               
+               }
+                          
+            ?>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="final_submit_ques()">
+               Add Question
             </button>
          </div>
       </div><!-- /.modal-content -->
 </div><!-- /.modal -->
 </div>
+
+
+
 
 
 
