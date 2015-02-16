@@ -25,12 +25,9 @@
 
 <style type="text/css">
 
-body{
-padding-top: 100px;	
-}
-
 #nbar{
 width: 80%;
+position: relative;
 margin-left: auto;
 margin-right: auto;
 //border:solid;	
@@ -44,14 +41,156 @@ width: 360px;
 width:150px;	
 }	
 
+body{
+overflow-x:hidden;
+overflow-y:scroll; 	
+}
+
 
 </style>
+
+<script src="script/resetmodaldata.js"></script>
+
+<script>
+
+
+
+function submitQues(){
+
+
+//store the question in a global variable
+
+question=document.getElementById("q_text").value;
+
+//alert(question);
+
+$('#myModal').modal('hide');
+	
+}
+
+function final_submit_ques(){
+	
+	//alert(question);
+	
+	
+	var t=document.getElementsByClassName("category");
+	
+	var str="";
+	
+	//alert(t.length);
+	
+	//alert(str);
+	
+	var count=0;
+	
+	for(i=0;i<t.length;i++){
+	
+	   if(t[i].checked){
+         
+         n=(t[i].value).toString();
+         
+         //alert(n);
+         
+         str=str+n+",";	   	
+	   	
+	   	}	
+		
+	}
+	
+	//alert(str);
+	
+   
+ $.post("add_ques_details.php",{ques:question,category:str},function(data){
+   	 
+   	 window.location="display_submitted_question.php?"+question+data;
+   	
+   	});  
+   	
+		
+	
+}
+
+</script>
 
 </head>
 
 
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" id="nbar">
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Add Question
+            </h4>
+         </div>
+         <div class="modal-body">
+            <textarea placeholder="What is your question?" id="q_text" cols="60" rows="5"></textarea>
+         </div>
+         <div class="modal-footer">
+            <a href="#myModal2" class="btn btn-primary" role="button" data-toggle="modal" onclick="submitQues()">Next</a>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Select Category
+            </h4>
+         </div>
+         <div class="modal-body">
+            <?php
+               
+               //some algorithm goes here which will suggest user some categories//
+               
+               session_start();     
+               
+               include 'dbconnection.php';
+               
+               $query="select * from category";
+               
+               $result=mysqli_query($conn,$query);
+                              
+               while($row=mysqli_fetch_assoc($result)){
+               
+               //value and name added later if needed
+               echo '<input type="checkbox" class="category" value="'.$row['category_id'].'">'.ucfirst($row['category_name']).'<br><br>';
+               
+               }
+                          
+            ?>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="final_submit_ques()">
+               Add Question
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+
+
+
+
+
+<nav class="navbar navbar-default" id="nbar">
   <div class="container-fluid" id="cont">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -69,7 +208,7 @@ width:150px;
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" id="search">
           <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
-          <button type="submit" class="btn btn-primary" id="addqbutton"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Add Question</button>        
+          <a href="#myModal" class="btn btn-primary" role="button" data-toggle="modal"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Add Question</a>       
         </div>       
       </form>
       <ul class="nav navbar-nav navbar-right">
@@ -97,10 +236,11 @@ width:150px;
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
+  
 
 
 </body>
 
 
 </html>
+

@@ -102,7 +102,7 @@ function final_submit_ques(){
    
  $.post("add_ques_details.php",{ques:question,category:str},function(data){
    	 
-   	 alert(data);
+   	 window.location="display_submitted_question.php?"+question+data;
    	
    	});  
    	

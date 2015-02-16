@@ -1,6 +1,6 @@
 <?php
 
-$a=10;
+/*$a=10;
 
 echo '
 
@@ -35,7 +35,15 @@ $.post("up.php",{moviename:a},function(data){
 </body>
 
 </html>
-';
+';*/
+
+$ar
+r=explode(",","1,2,3,4,");
+
+echo count($arr);
+
+for($i=0;$i<4;$i++)
+  echo $arr[$i];
 
 
 ?>
