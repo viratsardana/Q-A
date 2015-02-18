@@ -16,6 +16,7 @@ $('[data-dismiss=modal]').on('click', function (e) {
 
 $('#myModal').on('hidden.bs.modal', function(){
 	 //alert('hello');
+	 $("#message").remove();
     $("#q_text").val('');
 });
 

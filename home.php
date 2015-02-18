@@ -53,8 +53,7 @@ overflow-y:scroll;
 
 <script>
 
-
-
+f=0;
 function submitQues(){
 
 
@@ -62,11 +61,26 @@ function submitQues(){
 
 question=document.getElementById("q_text").value;
 
-//alert(question);
-
-$('#myModal').modal('hide');
+if(question[question.length-1]!='?'){
+	
+	//question should end with ?
+	
+	document.getElementById("next").href="#";
+	$('#ta').prepend('<p id="message">Question should end with ?</p>');
 	
 }
+
+//alert(question);
+
+else{
+
+document.getElementById("next").href="#myModal2";
+
+$('#myModal').modal('hide'); }
+	
+}
+
+
 
 function final_submit_ques(){
 	
@@ -98,8 +112,7 @@ function final_submit_ques(){
 	}
 	
 	//alert(str);
-	
-   
+	   
  $.post("add_ques_details.php",{ques:question,category:str},function(data){
    	 
    	 window.location="display_submitted_question.php?"+question+data;
@@ -119,7 +132,7 @@ function final_submit_ques(){
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
+   <div class="modal-dialog" id="f">
       <div class="modal-content">
          <div class="modal-header">
             <button type="button" class="close" 
@@ -130,11 +143,11 @@ function final_submit_ques(){
                Add Question
             </h4>
          </div>
-         <div class="modal-body">
+         <div class="modal-body" id="ta">
             <textarea placeholder="What is your question?" id="q_text" cols="60" rows="5"></textarea>
          </div>
          <div class="modal-footer">
-            <a href="#myModal2" class="btn btn-primary" role="button" data-toggle="modal" onclick="submitQues()">Next</a>
+            <a href="#myModal2" class="btn btn-primary" role="button" data-toggle="modal" onclick="submitQues()" id="next">Next</a>
          </div>
       </div><!-- /.modal-content -->
 </div><!-- /.modal -->

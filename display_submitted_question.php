@@ -34,7 +34,7 @@ alert(data);
 
 $("#answer_text").val('');	
 
-$(".col-md-5").append('<p><?php 
+$(".col-sm-5").append('<p><?php 
 
 echo 'username goes here'; 
 
@@ -64,6 +64,19 @@ top: -7px;
 left: -8px;
 }*/
 
+
+#question_topics{
+//border:solid;
+text-align: center;	
+}
+
+#qtopics{
+//position: relative;
+//left: 50px;	
+//text-align:center; 
+}
+
+
 </style>
 
 </head>
@@ -73,11 +86,37 @@ left: -8px;
 
 <div class="row">
 
-<div class="col-md-3">
+<div class="col-sm-3" id="question_topics">
+
+<span id="qtopics"><h5>Question Topics</h5></span>
+<?php
+
+session_start();
+
+//get all the topics for this question id
+include 'dbconnection.php';
+
+$str=$_SERVER['QUERY_STRING'];
+
+$quesid=substr(strrchr($str,"?"),1);
+
+//echo $quesid;
+
+$query="select distinct category_name from category natural join quescat where question_id='$quesid';";
+
+$result=mysqli_query($conn,$query);
+
+while($row=mysqli_fetch_row($result)){
+
+echo '<a href="#" class="qtlist" class="well">'.$row[0].'<br><br></a>';
+	
+}
+
+?>
 
 </div>
 
-<div class="col-md-5">
+<div class="col-sm-5" >
 <h4><span id="question_text"></span></h4>
 <hr>
 
@@ -117,6 +156,7 @@ echo $row[0].'<hr>';
 ?>
 
 </div>
+
 
 </div>
 
