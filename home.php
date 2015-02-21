@@ -66,6 +66,7 @@ if(question[question.length-1]!='?'){
 	//question should end with ?
 	
 	document.getElementById("next").href="#";
+	$("#message").remove();
 	$('#ta').prepend('<p id="message">Question should end with ?</p>');
 	
 }

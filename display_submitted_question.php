@@ -2,6 +2,43 @@
 
 include 'header.php';
 
+include 'dbconnection.php';
+
+session_start();
+
+$userid=$_SESSION['uid'];
+
+$str=$_SERVER['QUERY_STRING'];
+
+$quesid=substr(strrchr($str,"?"),1);
+
+$query="select ans from answers where answered_by='$userid' and question_id='$quesid'";
+
+$result=mysqli_query($conn,$query);
+
+$nrow=mysqli_num_rows($result);
+
+//echo $nrow;
+
+if($nrow==1){
+
+echo '
+
+<script>
+
+$(document).ready(function(){
+	
+$("#answer_area").remove();	
+
+$("#rem").remove();
+	
+});
+
+</script>
+
+';  }
+    
+
 ?>
 
 <html>
@@ -20,7 +57,7 @@ include 'header.php';
 function post_question(){
 
 //alert('hello');	
-
+ 
 var answer=document.getElementById("answer_text").value;
 
 
@@ -32,19 +69,29 @@ $.post("add_answer_db.php",{ans:answer,ques_id:question_id},function(data){
 
 alert(data);
 
-$("#answer_text").val('');	
+$("#answer_area").remove();	
 
-$(".col-sm-5").append('<p><?php 
+$("#rem").remove();
 
-echo 'username goes here'; 
-
-
-?>
-</p>'+'<hr>'+answer);
+$(".col-sm-5").append('<div class="answer" id="ownans" style="width:500px;word-wrap:break-word;"><span id="sans">'+answer+'</span><a href="#" onclick="editAns()" id="atg">&nbsp;Edit</a></div><hr>');
 	
 });
 
 
+//a user is allowed to post only one answer for a question------------>done
+
+//  fix bug on refresh //------------------------>done
+
+///////   add edit answer feature     ////////// 
+
+
+
+	
+}
+
+function foo(){
+
+alert('hello');
 	
 }
 
@@ -76,8 +123,15 @@ text-align: center;
 //text-align:center; 
 }
 
+.ans{
+width: 500px;
+word-wrap: break-word;	
+}
+
 
 </style>
+
+<script src="script/editAnswer.js"></script>
 
 </head>
 
@@ -109,6 +163,7 @@ $result=mysqli_query($conn,$query);
 while($row=mysqli_fetch_row($result)){
 
 echo '<a href="#" class="qtlist" class="well">'.$row[0].'<br><br></a>';
+
 	
 }
 
@@ -116,7 +171,7 @@ echo '<a href="#" class="qtlist" class="well">'.$row[0].'<br><br></a>';
 
 </div>
 
-<div class="col-sm-5" >
+<div class="col-sm-5" id="fi">
 <h4><span id="question_text"></span></h4>
 <hr>
 
@@ -127,9 +182,11 @@ echo '<a href="#" class="qtlist" class="well">'.$row[0].'<br><br></a>';
 <hr>
 <button type="button" class="btn btn-primary" onclick="post_question()">Post Answer</button>
 
+
+
 </div>
 
-<hr>
+<span id="rem"><hr></span>
 
 <?php
 
@@ -143,13 +200,20 @@ $quesid=substr(strrchr($str,"?"),1);
 
 include 'dbconnection.php';
 
-$query="select ans from answers where question_id='$quesid';";
+$query="select ans,answered_by from answers where question_id='$quesid';";
 
 $result=mysqli_query($conn,$query);
 
 while($row=mysqli_fetch_row($result)){
 
-echo $row[0].'<hr>';
+if($row[1]==$_SESSION['uid'])
+echo '<div class="ans" id="ownans"><span id="sans">'.$row[0].'</span>&nbsp;<a href="#" onclick="editAns()" id="atg">Edit</a></div>';
+
+
+else
+echo $row[0];
+
+echo '<hr>';
 	
 }
 

@@ -1,7 +1,22 @@
 <?php
-
+  
+  session_start();
+  
+  $check=$_SESSION['username'];
+  
+  $username=substr($_SERVER['QUERY_STRING'],9);
+  
+  //echo $username;  
+  
+  if($username==$check){
+  
+   header('Location:profile.php');
+  	
+  }
+  
+  //header should be the first thing to be sent to browser  
+  
   include 'header.php';
-
 
 ?>
 
