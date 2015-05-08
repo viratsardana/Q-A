@@ -21,8 +21,8 @@ top:30px;
 
 body{
 overflow: hidden;	
-//background:url('images.jpg');
-//background-repeat: no-repeat;
+//background: url('images/home.jpg');
+background-repeat: no-repeat;
 //background-size:1368px 720px;
 }
 

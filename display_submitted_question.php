@@ -30,7 +30,6 @@ $(document).ready(function(){
 	
 $("#answer_area").remove();	
 
-$("#rem").remove();
 	
 });
 
@@ -45,9 +44,6 @@ $("#rem").remove();
 
 <head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
 <script src="script/display_ques.js"></script>
@@ -73,7 +69,7 @@ $("#answer_area").remove();
 
 $("#rem").remove();
 
-$(".col-sm-5").append('<div class="answer" id="ownans" style="width:500px;word-wrap:break-word;"><span id="sans">'+answer+'</span><a href="#" onclick="editAns()" id="atg">&nbsp;Edit</a></div><hr>');
+$(".col-sm-5").append('<div class="answer" id="ownans" style="width:500px;word-wrap:break-word;"><span id="sans">'+answer+'</span><a href="#" onclick="editAns()" id="atg">&nbsp;Edit</a></div><br><a id="own-comment" href="#">Comments</a>');
 	
 });
 
@@ -123,15 +119,34 @@ text-align: center;
 //text-align:center; 
 }
 
-.ans{
+.answer{
 width: 500px;
 word-wrap: break-word;	
+}
+
+#own-comment-box{
+
+display: none;
+height: 100px;	
+	
 }
 
 
 </style>
 
 <script src="script/editAnswer.js"></script>
+
+<script type="text/javascript" >
+
+function displayCommentBox(){
+
+  //alert("hello");
+  
+  $("#own-comment-box").toggle();	
+	
+}
+
+</script>
 
 </head>
 
@@ -173,20 +188,13 @@ echo '<a href="#" class="qtlist" class="well">'.$row[0].'<br><br></a>';
 
 <div class="col-sm-5" id="fi">
 <h4><span id="question_text"></span></h4>
-<hr>
 
+<hr>
 
 <div class="well" id="answer_area">
-<hr>
 <textarea cols="50" rows="3" placeholder="Write your Answer" id="answer_text"></textarea>
-<hr>
 <button type="button" class="btn btn-primary" onclick="post_question()">Post Answer</button>
-
-
-
 </div>
-
-<span id="rem"><hr></span>
 
 <?php
 
@@ -204,17 +212,27 @@ $query="select ans,answered_by from answers where question_id='$quesid';";
 
 $result=mysqli_query($conn,$query);
 
+$i=0;
+
 while($row=mysqli_fetch_row($result)){
 
+
 if($row[1]==$_SESSION['uid'])
-echo '<div class="ans" id="ownans"><span id="sans">'.$row[0].'</span>&nbsp;<a href="#" onclick="editAns()" id="atg">Edit</a></div>';
+echo '<div class="answer" id="ownans"><span id="sans">'.$row[0].'</span>&nbsp;<a href="#" onclick="editAns()" id="atg">Edit</a></div><br id="br-own-comment">
+      <a href="#" id="own-comment" onclick="displayCommentBox()">Comments</a>
+      <div id="own-comment-box" class="well">
+      <input type="text" placeholder="Write your Comment" style="height:35px; width:380px;">&nbsp;&nbsp;<button class="btn btn-primary">Comment</btn>
+      </div>     
+      <hr id="hr-own-ans">';
 
 
 else
-echo $row[0];
+echo '<div class="answer"><span id="sans-no">'.$row[0].'</div><br id="br-comment"><a href="#" class="comment">Comments</a><hr id="hr-ans">';
 
-echo '<hr>';
-	
+//echo '<hr id="line'.$i.'">';
+
+$i=$i+1;
+
 }
 
 ?>
@@ -228,4 +246,3 @@ echo '<hr>';
 
 
 </html>
-

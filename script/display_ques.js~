@@ -27,7 +27,7 @@ question_id=nstr[1];
 
 //alert(question_str);
 
-alert(question_id);
+//alert(question_id);
  
 $("#question_text").text(question_str);
 	

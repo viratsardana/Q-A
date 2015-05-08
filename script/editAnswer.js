@@ -1,8 +1,6 @@
+flag=1;
+
 function editAns(){
-
-//alert('hello');
-
-$("#rem").remove();
 
 var save_answer=$("#sans").text();
 
@@ -23,28 +21,28 @@ $("#ownans").append('<button class="btn btn-primary" onclick="submit_answer()">U
 
 function submit_answer(){
 	
-//alert('hello');
-//alert($('#answer_text').val());
-//alert(question_id);
 
 var answer=$('#answer_text').val()
 
 $.post("update_answer_db.php",{ans:answer,ques_id:question_id},function(data){
 	
 
-//alert(data);
-
-$("#fi").find("hr").remove();
 	
 $("#answer_text").remove();
-//$("#rem").remove();
+
 
 $("#ownans").remove();
+/*if(flag){
+$("#line").remove();
+flag=0;
+}*/
 
-$("#question_text").append("<hr>");
+$("#own-comment").remove();
+$("#br-own-comment").remove();
+$("#hr-own-ans").remove();
+$("#own-comment-box").remove();
 
-$(".col-sm-5").append('<div class="answer" id="ownans" style="width:500px;word-wrap:break-word;"><hr><span id="sans">'+answer+'</span><a href="#" onclick="editAns()" id="atg">&nbsp;Edit</a></div><hr>');
-
+$(".col-sm-5").append('<div class="answer" id="ownans" style="width:500px;word-wrap:break-word;"><span id="sans">'+answer+'</span><a href="#" onclick="editAns()" id="atg">&nbsp;Edit</a></div><br id="br-own-comment"><a href="#" id="own-comment" onclick="displayCommentBox()">Comments</a><div id="own-comment-box" class="well"></div><hr id="hr-own-ans">');
 
 	
 });
